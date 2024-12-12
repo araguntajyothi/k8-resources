@@ -6,6 +6,8 @@ metadata:
     course: docker
     duration: 2h
     batch: second
+  annotations:
+     org.docker.kubernetes.image.maintainer: jyothi
 spec:
   containers:
     - name: nginx
