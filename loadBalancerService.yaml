@@ -18,22 +18,10 @@ kind: Service
 metadata:
   name: nginx-service
 spec:
+  type: LoadBalancer
   selector:
     server: nginx
   ports:
   - protocol: TCP
     port: 80  # service port
     targetPort: 80 # container port
-
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: debug
-  labels:
-    purpose: debug
-spec:
-  containers:
-  - name: almalinux
-    image: almalinux
-    command: ["sleep", "36000000"]
