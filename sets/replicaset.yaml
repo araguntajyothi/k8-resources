@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: ReplicaSet 
+metadata:
+  name: nginx
+  labels: # lables are related to replicaset
+    name: nginx
+    tier: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels: # this is the syntax for replicaset uses to find which pod should be scaled up and mainatined
+      tier: frontend
+  template: # pod template and labels are related to pod
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
