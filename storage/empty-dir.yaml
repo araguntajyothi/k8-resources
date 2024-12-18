@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-webapp
+  labels:
+    app: webapp
+spec:
+  containers:
+  - name: main-application
+    image: nginx:1.14.2
+    volumeMounts:
+    - name: shared-logs
+      mountPath: /var/logs/nginx
+  - name: sidecar
+    image: busybox
+    command: ["sh", "-c", "while true; do cat /var/logs/nginx/access.log; sleep 30; done"]
+    volumeMounts:
+    - name: shared-logs
+    mountPath: /var/logs/nginx
+  volumes:
+  - name: shared-logs
+    emptyDir: {}
